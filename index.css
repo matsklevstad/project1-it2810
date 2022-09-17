@@ -1,0 +1,70 @@
+body {
+  font-family: "Nova Flat", sans-serif;
+  background-color: rgb(116, 250, 178);
+}
+h1, h3, h4,footer {
+  color: rgb(114, 106, 106);
+  text-align: center;
+}
+
+button {
+  margin: auto;
+  font-size: 25px;
+  font-family: "Nova Flat", sans-serif;
+  background-color: rgb(116, 250, 178);
+  color: rgb(114, 106, 106);
+  padding: 15px 32px;
+  border-color: beige;
+}
+
+@media only screen and (min-width: 960px) {
+  #container {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  #doc-text {
+    padding-top: 30px;
+    margin: auto;
+    display: none;
+    text-align: left;
+    width: 700px;
+  }
+  #about {
+    width: 700px;
+    margin: auto;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  #container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  #doc-text {
+    padding-top: 30px;
+    margin: auto;
+    display: none;
+    text-align: left;
+    width: 400px;
+  }
+
+  #about {
+    width: 370px;
+    margin: auto;
+  }
+}
+
+#documentation {
+  text-align: center;
+}
+
+footer {
+  margin-top: auto;
+  padding-top: 50px;
+}

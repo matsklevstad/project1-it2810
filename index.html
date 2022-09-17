@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html html lang="en">
+  <head>
+    <meta charset="utf8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mitt abstrakte bilde</title>
+    <link rel="stylesheet" href="index.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Nova Flat"
+      rel="stylesheet"
+    />
+    <!-- Adding jQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div id="about">
+      <h1>PROSJEKT 1 - MITT ABSTRAKTE BILDE</h1>
+      <p>
+        Velkommen til mitt tegnehjørne. Jeg er en kunstner som tar faget IT2810
+        og som spesialiserer meg på bruk av SVG og Canvas for å uttryke mine
+        kunstneristiske ferdigheter. Jeg er veldig glad i figurer som
+        rektangler, trekanter, sirkler og firkanter med mer. Gjerne utforsk de
+        ulike figurene med musepekeren - kanskje du får deg en overraskelse?
+      </p>
+    </div>
+    <div id="container" class="container">
+      <div id="pic_left">
+        <h3>SVG</h3>
+        <svg id="svg" width="300" height="300">
+          <rect
+            class="sky"
+            id="sky"
+            x="0"
+            y="0"
+            width="300"
+            height="300"
+            fill="rgb(66, 182, 233)"
+          />
+          <circle id="sun" cx="0" cy="30" r="20" fill="rgb(254,250,157)">
+            <animate
+              attributeName="cx"
+              from="-20"
+              to="320"
+              dur="15s"
+              repeatCount="indefinite"
+            />
+          </circle>
+
+          <ellipse cx="0" cy="50" rx="25" ry="20" fill="white">
+            <animate
+              attributeName="cx"
+              from="-25"
+              to="325"
+              dur="10s"
+              repeatCount="indefinite"
+            />
+          </ellipse>
+
+          <ellipse cx="0" cy="45" rx="30" ry="20" fill="white">
+            <animate
+              attributeName="cx"
+              from="-30"
+              to="330"
+              dur="9s"
+              repeatCount="indefinite"
+            />
+          </ellipse>
+          <ellipse cx="0" cy="53" rx="35" ry="20" fill="white">
+            <animate
+              attributeName="cx"
+              from="-35"
+              to="335"
+              dur="12s"
+              repeatCount="indefinite"
+            />
+          </ellipse>
+
+          <polygon
+            id="roof"
+            points="140,120 115,160 165,160"
+            fill="rgb(248, 145, 100)"
+          />
+          <rect
+            id="house"
+            x="115"
+            y="162"
+            width="50"
+            height="50"
+            fill="rgb(255, 234, 181)"
+          />
+          <circle id="grass" cx="140" cy="298" r="90" fill="rgb(98, 191, 99)" />
+        </svg>
+      </div>
+      <div id="pic_right">
+        <h3>CANVAS</h3>
+        <!-- Gives the canvas heigth 400 to handle that mouseevent do not catch if the user remove the cursor from the grass when leaving the canvas(300 heigth)-->
+        <canvas id="canvas" width="300" height="400"></canvas>
+      </div>
+    </div>
+    <div id="documentation">
+      <button class="btn">VIS DOKUMENTASJON</button>
+      <div id="doc-text">
+        <h3>BRUKEN AV FLEXBOX-LAYOUT</h3>
+        Jeg valgte å bruke Flexbox-layout. Dette var fordi jeg fant en guide som
+        illustrerte godt de ulike egenskapene flexbox har. Dessuten følte jeg
+        "flex-direction"-egenskapen var veldig enkelt og greit for å plassere de
+        to bildene slik jeg ønsket. Jeg valgte å samle de to bildene med
+        flexbox, og ha resten av div-ene på deafult-måte utenom flex. Det å
+        plassere de to bildene i samme flexbox gjorde at jeg kunne plassere de
+        under hverandre når vinduet minimeres ved hjelp av å endre
+        "flex-direction" fra rad til kolonne. Resten valgte jeg å ikke plassere
+        i flexbox siden jeg ville ha det oppsatt slik det er deafult
+        (kronologisk over/under andre elementer i koden).
+
+        <h3>SVG I HTML OG HTML CANVAS</h3>
+        Jeg har brukt ulike geometriske figurer som det er støtte for i SVG.
+        Blant annet "circle", "polygon" og "rect". Disse har jeg bestemt
+        plassering, farge og størrelse på. SVG har også en innebygd
+        "animate"-funksjonalitet som jeg har tatt i bruk for å få til bevegelse
+        på skyene og solen. I animate velger man start- og sluttposisjon for en
+        bestemt verdi (jeg bruker x-verdien) og hvor lang tid animasjonen skal
+        ta. Jeg har også satt på at animasjonene skal foregå kontinuerlig.
+        <br />
+        <br />
+        For Canvas har jeg også tegnet figurene ved hjelp av innebygd
+        funksjonalitet. Jeg har delt opp det som er "stillestående" i en egen
+        funksjon. For å få animasjonen til å virke med Canvas må man tegne hele
+        bildet for hver lille bevegelse. Bildet tømmes helt før neste bevegelse
+        tegnes inn. Dette har jeg løst ved at drawStaticFigures() kalles i
+        animasjons-funksjonen slik at de statiske tegnes inn på sin faste
+        plassering, mens figurene som beveger seg tegnes inn med ny plassering.
+        Her har jeg også lagt til en lytter på sirkelen som er gresset på
+        bildet. Når man hovrer over sirkelen vil gresset endre farge, og når man
+        beveger musen ut av gresset vil den opprinnelige fargen vises. Jeg satt
+        canvas-bildet sin høyde til å være 400 selv om bildet kun er synlig som
+        300. Dette gjorde jeg fordi at hvis man markerte gresset og forlot
+        bildet ved 300-høyde, registrerte ikke lytteren at man hadde forlatt
+        gresset.
+        <br />
+        <br />
+        Jeg valgte å få til en animering av sol/skyene slik at når de forlater
+        bildet til høyre starter de øyeblikkelig på venstresiden igjen. Logikken
+        bak dette er at når figurene er en radiuslengde utenfor bildet skal de
+        starte på nytt igjen, men med en negativ radiuslengde til venstre for
+        x=0. Dette kommer av at x-koordinatet til figurene måles på midten av
+        figuren, så hvis man kun starter på x=0 når skyen forlater vinduet, vil
+        halve skyen gjenoppstå i vinduet ved start - og ikke få en "myk
+        overgang". Videre er det forskjellig måter å animere på i SVG og Canvas.
+        For å få figurene til å bevege seg så likt som overhodet mulig lagde jeg
+        meg en formel. Canvas har 60 frames i sekundet, og SVG beveger seg x
+        antall x-koordinater i løpet av et tidsrom. Da ble formelen min:
+        <br />
+        <br />
+        (Total koordinat-forflytting SVG-figur / Antall sekunder forflytting
+        SVG-figur) / 60 fps.
+        <br />
+        <br />
+        Slik finner jeg ut hvor langt canvas-figuren må flytte seg per frame for
+        å holde følge med matchende SVG-figur.
+
+        <h3>jQUERY</h3>
+        Jeg har brukt jQuery til å håndtere klikk på knapp og hovering over
+        SVG-figur. Når dokumentasjonsknappen trykkes blir teksten
+        synlig/usynlig, i tillegg til at man blir sendt opp/ned på nettsiden når
+        knappen trykkes. Knappen endrer i tillegg tekst for å gjøre det lettere
+        for brukeren å skjønne hvilken effekt det gir å trykke på knappen. Når
+        man hovrer over gresset på SVG-bildet finner jQuery id-en til gresset og
+        endrer direkte CSS-attributtet som gjelder fargen til gresset. Dersom
+        brukeren ikke lenger hovrer over gresset, vil den opprinnelige fargen
+        vises igjen.
+
+        <h3>CROSS-BROWSER TESTING</h3>
+        Mine to nettlesere har vært Firefox og Google Chrome. Jeg har jevnlig
+        byttet på å sjekke at alt virker som det skal i de to nettleserne. Dette
+        er lurt, så man ikke kaster bort tid på en funksjonalitet som ikke
+        fungerer på tvers av nettleserne. Jeg har hovedsaklig testet for
+        følgende ting: basisfunksjonalitet, design og respons.
+        Basisfunksjonaliteten har vært om dokumentasjonsknappen virker som den
+        skal. Designmessig har jeg sjekket at tekst, font og farge er den samme
+        i de to nettleserne. Responsmessig har jeg sett etter at når man
+        minimerer vinduet gjør begge nettsidene forventet oppførsel i form av å
+        flytte bildene under hverandre, samt gi teksten en mindre bredde.
+        <br />
+        <br />
+        Jeg har derimot merket meg at når man kjører nettsiden i Firefox og
+        Google Chrome, og bytter til en annen fane, kjører SVG-animasjonen
+        videre. Canvas sin requestAnimationFrame() stopper derimot når man
+        forlater nettleseren for å spare batteri og forbedre ytelse. Det er ikke
+        så lett å få gjort noe med at SVG kjører videre. Dette fører til at de
+        to animasjonen ikke blir synkrone dersom man bytter fane og kommer
+        tilbake igjen. Oppdaterer man nettsiden er man derimot synkron igjen.
+        <br />
+        <br />
+        Dette er sannsynligvis noe mange brukere ikke ville lagt merke til,
+        ettersom oppførelsen til bildene er helt likt uansett i form av at det
+        er skyer og sol som flytter på seg. Nettsiden oppfører seg ellers helt
+        lik uavhengig av nettleser og vindusstørrelse.
+
+        <h3>KILDER</h3>
+        <ul>
+          <li>Tutorials på nett for å lære om SVG og Flexbox</li>
+          <li>
+            YouTube-videoer for å få innføring i jQuery og tegning med Canvas
+          </li>
+          <li>
+            <a href="https://stackoverflow.com/a/66722289"
+              >Kilde brukt for å håndtere hovering i Canvas</a
+            >
+          </li>
+          <li>
+            <a href="https://stackoverflow.com/a/19365442">
+              Kilde brukt for å endre tekst når knappen trykkes på</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script src="script.js"></script>
+    <footer>WEBUTVIKLING - IT2810 - HØSTEN 2022</footer>
+  </body>
+</html>
